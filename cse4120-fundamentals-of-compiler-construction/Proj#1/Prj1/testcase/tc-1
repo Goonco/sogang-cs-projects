@@ -1,0 +1,24 @@
+int x;
+int y;
+int v;
+
+void f(bool v, int n) {
+  if (v) {
+    x = 1 + 2 * n;
+  }
+  return;
+}
+
+void g(void) {
+  v = 1;
+  return true;
+}
+
+int h(void) {
+  if (x) {
+    y = 1;
+  } else {
+    y = - 3;
+  }
+  return 0;
+}

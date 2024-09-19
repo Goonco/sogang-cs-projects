@@ -1,0 +1,17 @@
+int main(int i, bool b) {
+  int x;
+  int y;
+  int z;
+
+  x = 10;
+  x = x + 5;
+  y = x;
+
+  if (b) {
+    z = y + i;
+  } else {
+    z = y * i;
+  } 
+ 
+  return z;
+}

@@ -1,0 +1,16 @@
+int x;
+
+int f(void) { return 0; }
+
+int g(int f) {
+  int n;
+  n = f();
+}
+
+int h(void) {
+  int x;
+  x = 0;
+  while (x) {
+    x = x * 2;
+  }
+}
