@@ -1,0 +1,44 @@
+{
+module Lexer
+
+open FSharp.Text.Lexing
+open Parser
+
+let lexeme = LexBuffer<_>.LexemeString
+let newline (lbuf: LexBuffer<_>) = lbuf.EndPos <- lbuf.EndPos.NextLine
+let keywordMap =
+  Map.empty
+  |> Map.add "true" TRUE
+  |> Map.add "false" FALSE
+  |> Map.add "if" IF
+  |> Map.add "else" ELSE
+  |> Map.add "while" WHILE
+}
+
+let digit = ['0'-'9']
+let alpha = ['A'-'Z' 'a'-'z']
+let blank = [' ' '\t' '\r']
+let newline = ('\n' | '\r' '\n')
+
+rule token = parse
+  | '+'       { PLUS }
+  | '-'       { MINUS }
+  | "=="      { EQUAL }
+  | "!="      { NOTEQ }
+  | '<'       { LESS }
+  | '>'       { GREATER }
+  | '('       { LPAR }
+  | ')'       { RPAR }
+  | '{'       { LBRA }
+  | '}'       { RBRA }
+  | '='       { ASSIGN }
+  | ';'       { SEMICOLON }
+  | eof       { EOF }
+  | blank+    { token lexbuf }
+  | newline   { newline lexbuf; token lexbuf }
+  | digit+    { NUM (int (lexeme lexbuf)) }
+  | (alpha|'_')(alpha|digit|'_')* { let s = lexeme lexbuf
+                                    match Map.tryFind s keywordMap with
+                                    | Some kwd -> kwd
+                                    | None -> IDENTIFIER (lexeme lexbuf) }
+  | _ { printfn "Invalid token '%s'" (lexeme lexbuf); exit 1 }

@@ -207,6 +207,3 @@ module Type =
     // let _ = printSubstitution (getKeyList generatedSubstitution) generatedSubstitution in
     
     Map.find programTypeStr generatedSubstitution
-
-// dotnet build -o out
-// ./out/FMinusType testcase/tc-2 -> FMinusType directory에서

@@ -1,0 +1,48 @@
+%{
+
+%}
+
+%token TRUE FALSE PLUS MINUS EQUAL NOTEQ LESS GREATER
+%token <int> NUM
+%token <string> IDENTIFIER
+%token LPAR RPAR LBRA RBRA ASSIGN SEMICOLON IF ELSE WHILE
+%token AMP STAR
+%token EOF
+
+%right SEMICOLON
+%left EQUAL NOTEQ LESS GREATER
+%left PLUS MINUS
+%right STAR
+
+%start prog
+%type <AST.Program> prog
+
+%%
+
+exp:  NUM { AST.Num $1 }
+    | TRUE { AST.True }
+    | FALSE { AST.False }
+    | lval { AST.LV $1 }
+    | AMP IDENTIFIER { AST.AddrOf $2 }
+    | exp PLUS exp { AST.Add ($1, $3) }
+    | exp MINUS exp { AST.Sub ($1, $3) }
+    | exp EQUAL exp { AST.Equal ($1, $3) }
+    | exp NOTEQ exp { AST.NotEq ($1, $3) }
+    | exp LESS exp { AST.LessThan ($1, $3) }
+    | exp GREATER exp { AST.GreaterThan ($1, $3) }
+    | LPAR exp RPAR { $2 }
+
+lval: IDENTIFIER { AST.Var $1 }
+    | STAR exp { AST.Deref $2 }
+
+
+stmt: { AST.NOP (* Epsilon case *) }
+    | lval ASSIGN exp { AST.Assign ($1, $3) }
+    | IF LPAR exp RPAR LBRA stmt RBRA elseopt { AST.If ($3, $6, $8) }
+    | WHILE LPAR exp RPAR LBRA stmt RBRA { AST.While ($3, $6) }
+    | stmt SEMICOLON stmt { AST.Seq ($1, $3) }
+
+elseopt:  { AST.NOP (* Epsilon case *) }
+        | ELSE LBRA stmt RBRA { $3 }
+
+prog: stmt EOF { $1 }
