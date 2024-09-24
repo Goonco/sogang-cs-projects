@@ -266,10 +266,6 @@ let run (p: program): ir_code =
 
   (fname, extract_names args, ansInstrList)
 
-
-
-
-
 (* -------------------------------- *)
 
     (* let (numInst, numOpr) = trans_exp exp symbolMap in

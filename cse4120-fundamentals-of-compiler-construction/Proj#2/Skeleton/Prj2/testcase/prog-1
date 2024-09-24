@@ -1,0 +1,11 @@
+int main(int i, bool b) {
+  int n;
+
+  if (b) {
+    n = 2 * i + 1; 
+  } else {
+    n = i / 2 - 1;
+  } 
+ 
+  return n;
+}
