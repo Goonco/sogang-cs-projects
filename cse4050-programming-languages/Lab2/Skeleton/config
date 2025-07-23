@@ -1,0 +1,2 @@
+CMinus src/CMinus.fs 60 3
+CMinusPtr src/CMinusPtr.fs 40 3

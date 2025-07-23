@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src/AST.fs" />
+    <FsLex Include="src/Lexer.fsl">
+      <OtherFlags>--unicode -o src/Lexer.fs</OtherFlags>
+    </FsLex>
+    <FsYacc Include="src/Parser.fsy">
+      <OtherFlags>--module Parser -o src/Parser.fs</OtherFlags>
+    </FsYacc>
+    <Compile Include="src/Parser.fs" />
+    <Compile Include="src/Lexer.fs" />
+    <Compile Include="src/Types.fs" />
+    <Compile Include="src/CMinus.fs" />
+    <Compile Include="src/Main.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsLexYacc" Version="11.2.0" />
+    <PackageReference Include="FsLexYacc.Runtime" Version="11.2.0" />
+  </ItemGroup>
+
+</Project>
