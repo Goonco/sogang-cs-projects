@@ -1,0 +1,23 @@
+int f(int x, int y) {
+  int i_arr[4];
+  bool b_arr[4];
+  int n;
+
+  n = 0;
+
+  i_arr[0] = 1;
+  i_arr[1] = 2;
+  i_arr[2] = 3;
+  i_arr[3] = 4;
+
+  b_arr[0] = true;
+  b_arr[1] = false;
+  b_arr[2] = true;
+  b_arr[3] = false;
+
+  if (b_arr[y]) {
+    n = n + 5;
+  }
+
+  return i_arr[x] + n;
+}

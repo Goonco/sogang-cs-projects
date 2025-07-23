@@ -1,0 +1,3 @@
+Operand type mismatch (no detailed information)
+Trying to use function f like variable
+Variable is int type, but assigning bool type value

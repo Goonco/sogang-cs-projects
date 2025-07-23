@@ -1,0 +1,2 @@
+Function must return void type, but statement is returning bool type
+Operand type mismatch (no detailed information)
