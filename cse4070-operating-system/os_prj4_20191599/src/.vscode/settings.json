@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "filesys.h": "c",
+    "frame.h": "c"
+  }
+}
